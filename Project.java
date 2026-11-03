@@ -13,6 +13,7 @@ public class Project implements Serializable {
     private String tag;
     private String description;
     private final List<Task> tasks = new ArrayList<>();
+    private final List<AttachmentLink> attachments = new ArrayList<>();
     private int commentCount = 0;
 
     public Project(String name, String tag, String description) {
@@ -27,6 +28,8 @@ public class Project implements Serializable {
     public String getTag() { return tag; }
     public String getDescription() { return description; }
     public int getCommentCount() { return commentCount; }
+    public void setCommentCount(int c) { this.commentCount = c; }
+    public List<AttachmentLink> getAttachments() { return attachments; }
     public List<Task> getTasks() { return tasks; }
 
     public void edit(String name, String tag, String description) {
@@ -45,6 +48,20 @@ public class Project implements Serializable {
         for (Task t : tasks) if (t.getId() == taskId) return t;
         return null;
     }
+
+    // ---- Attachments ----
+    public void addAttachment(AttachmentLink a) { attachments.add(a); }
+
+    public boolean removeAttachmentById(int linkId) {
+        return attachments.removeIf(a -> a.getId() == linkId);
+    }
+
+    public boolean hasCatalogItem(int catalogId) {
+        for (AttachmentLink a : attachments) if (a.getCatalogId() == catalogId) return true;
+        return false;
+    }
+
+    public int getAttachmentCount() { return attachments.size(); }
 
     // ---- Derived counts (never stored) ----
     public int getTotalTasks() { return tasks.size(); }
