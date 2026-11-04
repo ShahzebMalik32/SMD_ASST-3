@@ -1,0 +1,13 @@
+TEAM MEETING NOTES
+
+Attendees: Hari, Ayesha, Sam
+
+Decisions
+- Use a card-based layout for the dashboard.
+- Keep the colour palette to blue, red and neutral greys.
+- Weekly review every Friday.
+
+Action items
+- Hari: finish the wireframes.
+- Ayesha: collect product photos.
+- Sam: set up the analytics tracking.

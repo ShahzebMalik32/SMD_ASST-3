@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="260dp"
+    android:viewportWidth="300"
+    android:viewportHeight="260">
+    <!-- key tile -->
+    <path
+        android:fillColor="#1DE9B6"
+        android:pathData="M20,20h28a10,10 0 0 1 10,10v28a10,10 0 0 1 -10,10h-28a10,10 0 0 1 -10,-10v-28a10,10 0 0 1 10,-10z" />
+    <path
+        android:fillColor="#14172B"
+        android:pathData="M24,44a6,6 0 1 1 12,0a6,6 0 1 1 -12,0z" />
+    <!-- gear circle -->
+    <path
+        android:fillColor="#14172B"
+        android:pathData="M18,120a22,22 0 1 1 44,0a22,22 0 1 1 -44,0z" />
+    <path
+        android:fillColor="#1DE9B6"
+        android:pathData="M30,120a10,10 0 1 1 20,0a10,10 0 1 1 -20,0z" />
+    <!-- pencil -->
+    <path
+        android:fillColor="#FF3D9A"
+        android:pathData="M205,40l30,22l-72,88l-32,10l10,-34z" />
+    <path
+        android:fillColor="#14172B"
+        android:pathData="M131,158l10,-34l22,26z" />
+    <!-- hand + cuff -->
+    <path
+        android:fillColor="#FF3D9A"
+        android:pathData="M200,120a34,28 0 1 1 68,0a34,28 0 1 1 -68,0z" />
+    <path
+        android:fillColor="#1DE9B6"
+        android:pathData="M262,100h34v40h-34z" />
+    <!-- big check tile -->
+    <path
+        android:fillColor="#14172B"
+        android:pathData="M44,170h52a14,14 0 0 1 14,14v52a14,14 0 0 1 -14,14h-52a14,14 0 0 1 -14,-14v-52a14,14 0 0 1 14,-14z" />
+    <path
+        android:pathData="M50,212l14,14l28,-30"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="8" />
+    <!-- lock circle -->
+    <path
+        android:fillColor="#1DE9B6"
+        android:pathData="M128,222a22,22 0 1 1 44,0a22,22 0 1 1 -44,0z" />
+    <path
+        android:fillColor="#14172B"
+        android:pathData="M141,218h18v14h-18z" />
+    <!-- cart tile -->
+    <path
+        android:fillColor="#14172B"
+        android:pathData="M196,202h34a10,10 0 0 1 10,10v24a10,10 0 0 1 -10,10h-34a10,10 0 0 1 -10,-10v-24a10,10 0 0 1 10,-10z" />
+    <path
+        android:fillColor="#1DE9B6"
+        android:pathData="M198,216h30v12h-30z" />
+    <!-- heart circle -->
+    <path
+        android:fillColor="#1DE9B6"
+        android:pathData="M248,222a22,22 0 1 1 44,0a22,22 0 1 1 -44,0z" />
+    <path
+        android:fillColor="#14172B"
+        android:pathData="M260,222a10,10 0 1 1 20,0a10,10 0 1 1 -20,0z" />
+</vector>

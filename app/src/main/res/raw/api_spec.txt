@@ -1,0 +1,18 @@
+LOGIN API SPECIFICATION
+
+POST /api/login
+  body: { "email": string, "password": string }
+  200:  { "accessToken": string, "refreshToken": string }
+  401:  { "error": "invalid credentials" }
+
+POST /api/token/refresh
+  body: { "refreshToken": string }
+  200:  { "accessToken": string, "refreshToken": string }
+
+POST /api/logout
+  header: Authorization: Bearer <accessToken>
+  204:  no content
+
+Notes
+- Access tokens expire after 15 minutes.
+- Refresh tokens rotate on every use.

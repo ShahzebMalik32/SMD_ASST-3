@@ -1,0 +1,16 @@
+SERVICE PAGE WEBSITE - PROJECT BRIEF
+
+Goal
+Create a page that displays the services offered by the company, using a blue and red colour scheme.
+
+Scope
+1. A hero section with a short pitch and a call-to-action button.
+2. A grid of service cards, each showing a short description and price information.
+3. A responsive layout that works on phones, tablets and desktops.
+4. A contact form with basic validation.
+
+Out of scope
+- Online payments
+- User accounts
+
+Deadline: end of the month.
