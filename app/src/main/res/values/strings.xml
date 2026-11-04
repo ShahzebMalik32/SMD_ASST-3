@@ -1,0 +1,135 @@
+<resources>
+    <string name="app_name">TaskFlow</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+    <string name="save_changes">Save</string>
+
+    <!-- Splash -->
+    <string name="splash_tagline">Management of a project will be easier if it is done well</string>
+    <string name="get_started">Get Started</string>
+    <string name="splash_art_description">Project management illustration</string>
+
+    <!-- Home -->
+    <string name="greeting_format">Hi, %1$s</string>
+    <string name="greeting_subtitle">Are you ready to get back to work?</string>
+    <string name="workspace_label">Workspace</string>
+    <string name="workspace_name">Sports App</string>
+    <string name="workspace_created">Created : <b>20 May 2022</b></string>
+    <string name="new_project">+ New Project</string>
+    <string name="invite">Invite</string>
+    <string name="open_workspace">Open workspace</string>
+    <string name="hint_search_projects">Search projects...</string>
+    <string name="showing_projects_format">Showing %1$d of %2$d projects</string>
+    <string name="no_projects_match">No projects match your search</string>
+    <string name="task_progress_format">%1$d/%2$d tasks</string>
+    <string name="percent_format">%1$d%%</string>
+    <plurals name="attachments_count">
+        <item quantity="one">%d Attachment</item>
+        <item quantity="other">%d Attachments</item>
+    </plurals>
+    <plurals name="comments_count">
+        <item quantity="one">%d Comment</item>
+        <item quantity="other">%d Comments</item>
+    </plurals>
+    <plurals name="files_count">
+        <item quantity="one">%d file</item>
+        <item quantity="other">%d files</item>
+    </plurals>
+
+    <!-- Project screen -->
+    <string name="back">Back</string>
+    <string name="tab_overview">Overview</string>
+    <string name="tab_tasks_format">Tasks (%1$d)</string>
+    <string name="tab_files_format">Files (%1$d)</string>
+    <string name="tab_discussion_format">Discussion (%1$d)</string>
+
+    <!-- Overview -->
+    <string name="brief_and_scope">BRIEF &amp; SCOPE</string>
+    <string name="edit_project">Edit Project</string>
+    <string name="project_progress">PROJECT PROGRESS</string>
+    <string name="tasks_completed_format">%1$d of %2$d tasks completed</string>
+    <string name="task_breakdown">TASK BREAKDOWN</string>
+    <string name="status_todo">To do</string>
+    <string name="status_in_progress">In progress</string>
+    <string name="status_done">Done</string>
+    <string name="status_overdue">Overdue</string>
+    <string name="tap_to_filter">Tap any card to filter tasks</string>
+    <string name="quick_links">QUICK LINKS</string>
+    <string name="attachments">Attachments</string>
+    <string name="discussion">Discussion</string>
+    <string name="add_task">+ Add Task</string>
+    <string name="add_task_description">Add task</string>
+    <string name="chevron_description">Open</string>
+
+    <!-- Tasks -->
+    <string name="hint_search_tasks">Search tasks in project...</string>
+    <string name="showing_tasks_format">Showing %1$d of %2$d tasks</string>
+    <string name="reset_filters">Reset filters</string>
+    <string name="reset_filters_button">Reset Filters</string>
+    <string name="no_tasks_yet">No tasks yet</string>
+    <string name="no_tasks_match">No tasks match these filters</string>
+    <string name="overdue_label">OVERDUE</string>
+    <string name="no_due_date">No due date</string>
+    <string name="due_today">Due today</string>
+    <string name="due_format">Due %1$s</string>
+    <string name="task_done_checkbox">Mark task as done</string>
+
+    <!-- Task dialog -->
+    <string name="add_task_title">Add New Task</string>
+    <string name="edit_task_title">Edit Task</string>
+    <string name="label_task_description">TASK DESCRIPTION *</string>
+    <string name="hint_task_description">e.g. Build responsive hero layout and optimize assets</string>
+    <string name="label_priority">PRIORITY</string>
+    <string name="label_status">STATUS</string>
+    <string name="label_due_date">DUE DATE (OPTIONAL)</string>
+    <string name="hint_due_date">Select a date</string>
+    <string name="clear_date">Clear</string>
+    <string name="char_count_format">%1$d/%2$d</string>
+    <string name="error_task_required">Task description is required (1-500 characters)</string>
+    <string name="error_task_too_long">Task description must be 500 characters or fewer</string>
+    <string name="delete_task_title">Delete task?</string>
+    <string name="delete_task_message">This task will be removed from the project.</string>
+    <string name="save_task">Add Task</string>
+
+    <!-- Project dialog -->
+    <string name="new_project_title">New Project</string>
+    <string name="label_project_name">Project Name</string>
+    <string name="label_project_tag">Project Tag</string>
+    <string name="label_attachment">Attachment (optional)</string>
+    <string name="label_project_description">Project Description</string>
+    <string name="hint_project_name">e.g. Login api</string>
+    <string name="hint_project_tag">e.g. Backend</string>
+    <string name="hint_add_attachment">Choose from catalog</string>
+    <string name="hint_project_description">What is this project about?</string>
+    <string name="add_project">Add Project</string>
+    <string name="error_project_name">Name is required (1-60 characters)</string>
+    <string name="error_project_tag">Tag is required (1-20 characters)</string>
+    <string name="error_project_description">Description is required (1-500 characters)</string>
+
+    <!-- Files -->
+    <string name="hint_search_files">Search attachments by display name...</string>
+    <string name="chip_all_format">All (%1$d)</string>
+    <string name="chip_images_format">Images (%1$d)</string>
+    <string name="chip_text_format">Text (%1$d)</string>
+    <string name="showing_attachments_format">Showing %1$d of %2$d attachments</string>
+    <string name="add_attachment">+ Add Attachment</string>
+    <string name="no_attachments_yet">No attachments yet</string>
+    <string name="no_attachments_match">No attachments match your search or type</string>
+    <string name="reset">Reset</string>
+    <string name="preview">Preview</string>
+    <string name="close">Close</string>
+    <string name="remove_attachment_description">Remove attachment</string>
+    <string name="type_image">Image</string>
+    <string name="type_text">Text document</string>
+    <string name="select_attachment">Select attachment</string>
+    <string name="no_more_catalog_items">Every catalog item is already attached.</string>
+    <string name="remove_attachment_title">Remove attachment</string>
+    <string name="remove_attachment_message">To remove this attachment, type its name exactly: %1$s</string>
+    <string name="hint_confirm_name">Type the attachment name</string>
+    <string name="remove">Remove</string>
+
+    <!-- Discussion -->
+    <string name="coming_soon">Coming Soon</string>
+</resources>

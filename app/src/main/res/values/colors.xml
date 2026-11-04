@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="navy">#14172B</color>
+    <color name="accent_blue">#3399FF</color>
+    <color name="screen_background">#F5F5F5</color>
+    <color name="text_primary">#1F1F1F</color>
+    <color name="text_secondary">#8A8A8A</color>
+    <color name="text_done">#6B7280</color>
+    <color name="divider">#E4E4E4</color>
+    <color name="chip_purple_bg">#EDE9FB</color>
+    <color name="chip_purple_text">#7B61C1</color>
+    <color name="input_grey">#E1E4E6</color>
+    <color name="attach_pink">#FDE4E4</color>
+    <color name="attach_lavender">#E8E7FD</color>
+    <color name="attach_cream">#FFF4DA</color>
+    <color name="splash_top">#DDEBF3</color>
+    <color name="splash_bottom">#E9E8D4</color>
+    <color name="teal">#1DE9B6</color>
+    <color name="pink">#FF3D9A</color>
+    <color name="red">#D92D3A</color>
+    <color name="red_bg">#FDECEC</color>
+    <color name="green">#1F8A5B</color>
+    <color name="green_bg">#E3F6EC</color>
+    <color name="orange">#B7791F</color>
+    <color name="orange_bg">#FFF3DC</color>
+    <color name="blue_bg">#E6F1FF</color>
+    <color name="grey_bg">#ECEDEF</color>
+</resources>
