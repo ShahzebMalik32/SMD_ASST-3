@@ -1,83 +1,85 @@
 package com.example.taskflow;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
-/** Home list rows. Shows the list it is given; the activity owns and filters the data. */
-public class ProjectAdapter extends BaseAdapter {
+public class ProjectAdapter extends ListAdapter<Project, ProjectAdapter.ProjectViewHolder> {
 
-    private final Context context;
-    private final List<Project> items;
+    public interface OnProjectClickListener {
+        void onProjectClick(Project project);
+    }
 
-    public ProjectAdapter(Context context, List<Project> items) {
-        this.context = context;
-        this.items = items;
+    private final OnProjectClickListener listener;
+
+    public ProjectAdapter(OnProjectClickListener listener) {
+        super(DIFF_CALLBACK);
+        this.listener = listener;
+    }
+
+    private static final DiffUtil.ItemCallback<Project> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Project>() {
+                @Override
+                public boolean areItemsTheSame(@NonNull Project a, @NonNull Project b) {
+                    return a.getId() == b.getId();
+                }
+
+                @Override
+                public boolean areContentsTheSame(@NonNull Project a, @NonNull Project b) {
+                    return a.getName().equals(b.getName())
+                            && a.getTag().equals(b.getTag())
+                            && a.getDescription().equals(b.getDescription())
+                            && a.getCompletedCount() == b.getCompletedCount()
+                            && a.getTotalCount() == b.getTotalCount()
+                            && a.getPercent() == b.getPercent()
+                            && a.getAttachmentCount() == b.getAttachmentCount()
+                            && a.getCommentCount() == b.getCommentCount();
+                }
+            };
+
+    @NonNull
+    @Override
+    public ProjectViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_project, parent, false);
+        return new ProjectViewHolder(v);
     }
 
     @Override
-    public int getCount() {
-        return items.size();
+    public void onBindViewHolder(@NonNull ProjectViewHolder h, int position) {
+        Project p = getItem(position);
+        h.tvTag.setText(p.getTag());
+        h.tvName.setText(p.getName());
+        h.tvDescription.setText(p.getDescription());
+        h.tvTasks.setText(p.getCompletedCount() + "/" + p.getTotalCount() + " tasks");
+        h.tvPercent.setText(p.getPercent() + "%");
+        h.progressBar.setProgress(p.getPercent());
+        h.tvAttachments.setText(p.getAttachmentCount() + " attachments");
+        h.tvComments.setText(p.getCommentCount() + " comments");
+        h.itemView.setOnClickListener(v -> listener.onProjectClick(p));
     }
 
-    @Override
-    public Project getItem(int position) {
-        return items.get(position);
-    }
+    static class ProjectViewHolder extends RecyclerView.ViewHolder {
+        TextView tvTag, tvName, tvDescription, tvTasks, tvPercent, tvAttachments, tvComments;
+        ProgressBar progressBar;
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    private static class Holder {
-        TextView tag;
-        TextView name;
-        TextView description;
-        TextView tasks;
-        TextView percent;
-        ProgressBar progress;
-        TextView attachments;
-        TextView comments;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Holder h;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_project_card, parent, false);
-            h = new Holder();
-            h.tag = convertView.findViewById(R.id.tvProjectTag);
-            h.name = convertView.findViewById(R.id.tvProjectName);
-            h.description = convertView.findViewById(R.id.tvProjectDescription);
-            h.tasks = convertView.findViewById(R.id.tvTaskProgress);
-            h.percent = convertView.findViewById(R.id.tvPercent);
-            h.progress = convertView.findViewById(R.id.progressProject);
-            h.attachments = convertView.findViewById(R.id.tvAttachmentCount);
-            h.comments = convertView.findViewById(R.id.tvCommentCount);
-            convertView.setTag(h);
-        } else {
-            h = (Holder) convertView.getTag();
+        ProjectViewHolder(@NonNull View v) {
+            super(v);
+            tvTag = v.findViewById(R.id.tvTag);
+            tvName = v.findViewById(R.id.tvName);
+            tvDescription = v.findViewById(R.id.tvDescription);
+            tvTasks = v.findViewById(R.id.tvTasks);
+            tvPercent = v.findViewById(R.id.tvPercent);
+            progressBar = v.findViewById(R.id.progressBar);
+            tvAttachments = v.findViewById(R.id.tvAttachments);
+            tvComments = v.findViewById(R.id.tvComments);
         }
-
-        Project p = items.get(position);
-        h.tag.setText(p.getTag());
-        h.name.setText(p.getName());
-        h.description.setText(p.getDescription());
-        h.tasks.setText(context.getString(R.string.task_progress_format,
-                p.getCompletedTaskCount(), p.getTotalTaskCount()));
-        h.percent.setText(context.getString(R.string.percent_format, p.getProgressPercent()));
-        h.progress.setProgress(p.getProgressPercent());
-        h.attachments.setText(context.getResources().getQuantityString(
-                R.plurals.attachments_count, p.getAttachmentCount(), p.getAttachmentCount()));
-        h.comments.setText(context.getResources().getQuantityString(
-                R.plurals.comments_count, p.getCommentCount(), p.getCommentCount()));
-        return convertView;
     }
 }
