@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Objects;
+
 public class ProjectAdapter extends ListAdapter<Project, ProjectAdapter.ProjectViewHolder> {
 
     public interface OnProjectClickListener {
@@ -28,17 +30,17 @@ public class ProjectAdapter extends ListAdapter<Project, ProjectAdapter.ProjectV
             new DiffUtil.ItemCallback<Project>() {
                 @Override
                 public boolean areItemsTheSame(@NonNull Project a, @NonNull Project b) {
-                    return a.getId() == b.getId();
+                    return a.getId().equals(b.getId());
                 }
 
                 @Override
                 public boolean areContentsTheSame(@NonNull Project a, @NonNull Project b) {
-                    return a.getName().equals(b.getName())
-                            && a.getTag().equals(b.getTag())
-                            && a.getDescription().equals(b.getDescription())
-                            && a.getCompletedCount() == b.getCompletedCount()
-                            && a.getTotalCount() == b.getTotalCount()
-                            && a.getPercent() == b.getPercent()
+                    return Objects.equals(a.getName(), b.getName())
+                            && Objects.equals(a.getTag(), b.getTag())
+                            && Objects.equals(a.getDescription(), b.getDescription())
+                            && a.getCompletedTaskCount() == b.getCompletedTaskCount()
+                            && a.getTotalTaskCount() == b.getTotalTaskCount()
+                            && a.getProgressPercent() == b.getProgressPercent()
                             && a.getAttachmentCount() == b.getAttachmentCount()
                             && a.getCommentCount() == b.getCommentCount();
                 }
@@ -48,7 +50,7 @@ public class ProjectAdapter extends ListAdapter<Project, ProjectAdapter.ProjectV
     @Override
     public ProjectViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_project, parent, false);
+                .inflate(R.layout.item_project_card, parent, false);
         return new ProjectViewHolder(v);
     }
 
@@ -58,28 +60,29 @@ public class ProjectAdapter extends ListAdapter<Project, ProjectAdapter.ProjectV
         h.tvTag.setText(p.getTag());
         h.tvName.setText(p.getName());
         h.tvDescription.setText(p.getDescription());
-        h.tvTasks.setText(p.getCompletedCount() + "/" + p.getTotalCount() + " tasks");
-        h.tvPercent.setText(p.getPercent() + "%");
-        h.progressBar.setProgress(p.getPercent());
-        h.tvAttachments.setText(p.getAttachmentCount() + " attachments");
-        h.tvComments.setText(p.getCommentCount() + " comments");
+        h.tvTaskProgress.setText(p.getCompletedTaskCount() + "/" + p.getTotalTaskCount() + " tasks");
+        h.tvPercent.setText(p.getProgressPercent() + "%");
+        h.progress.setProgress(p.getProgressPercent());
+        h.tvAttachments.setText(String.valueOf(p.getAttachmentCount()));
+        h.tvComments.setText(String.valueOf(p.getCommentCount()));
         h.itemView.setOnClickListener(v -> listener.onProjectClick(p));
     }
 
     static class ProjectViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTag, tvName, tvDescription, tvTasks, tvPercent, tvAttachments, tvComments;
-        ProgressBar progressBar;
+        final TextView tvTag, tvName, tvDescription, tvTaskProgress, tvPercent,
+                tvAttachments, tvComments;
+        final ProgressBar progress;
 
         ProjectViewHolder(@NonNull View v) {
             super(v);
-            tvTag = v.findViewById(R.id.tvTag);
-            tvName = v.findViewById(R.id.tvName);
-            tvDescription = v.findViewById(R.id.tvDescription);
-            tvTasks = v.findViewById(R.id.tvTasks);
+            tvTag = v.findViewById(R.id.tvProjectTag);
+            tvName = v.findViewById(R.id.tvProjectName);
+            tvDescription = v.findViewById(R.id.tvProjectDescription);
+            tvTaskProgress = v.findViewById(R.id.tvTaskProgress);
             tvPercent = v.findViewById(R.id.tvPercent);
-            progressBar = v.findViewById(R.id.progressBar);
-            tvAttachments = v.findViewById(R.id.tvAttachments);
-            tvComments = v.findViewById(R.id.tvComments);
+            progress = v.findViewById(R.id.progressProject);
+            tvAttachments = v.findViewById(R.id.tvAttachmentCount);
+            tvComments = v.findViewById(R.id.tvCommentCount);
         }
     }
 }

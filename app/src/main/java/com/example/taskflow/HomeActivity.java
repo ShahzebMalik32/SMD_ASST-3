@@ -5,15 +5,17 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -22,13 +24,14 @@ public class HomeActivity extends AppCompatActivity {
 
     /** The full project collection. */
     private final ArrayList<Project> projects = new ArrayList<>();
-    /** What the ListView currently shows (the collection filtered by the search box). */
-    private final ArrayList<Project> visibleProjects = new ArrayList<>();
+    /** What the RecyclerView currently shows (the collection filtered by the search box). */
+    private ArrayList<Project> visibleProjects = new ArrayList<>();
 
     private ProjectAdapter adapter;
     private EditText etSearch;
     private TextView tvShowing;
-    private ListView lvProjects;
+    private TextView tvNoProjects;
+    private RecyclerView rvProjects;
 
     private ActivityResultLauncher<Intent> projectLauncher;
 
@@ -44,7 +47,8 @@ public class HomeActivity extends AppCompatActivity {
         Button btnNewProject = findViewById(R.id.btnNewProject);
         etSearch = findViewById(R.id.etSearchProjects);
         tvShowing = findViewById(R.id.tvShowingProjects);
-        lvProjects = findViewById(R.id.lvProjects);
+        tvNoProjects = findViewById(R.id.tvNoProjects);
+        rvProjects = findViewById(R.id.rvProjects);
 
         String userName = getIntent().getStringExtra(Constants.EXTRA_USER_NAME);
         if (TextUtils.isEmpty(userName)) {
@@ -54,11 +58,9 @@ public class HomeActivity extends AppCompatActivity {
 
         projects.addAll(SampleData.buildProjects());
 
-        adapter = new ProjectAdapter(this, visibleProjects);
-        lvProjects.setAdapter(adapter);
-        lvProjects.setEmptyView(findViewById(R.id.tvNoProjects));
-        lvProjects.setOnItemClickListener((parent, view, position, id) ->
-                openProjectScreen(adapter.getItem(position)));
+        adapter = new ProjectAdapter(this::openProjectScreen);
+        rvProjects.setLayoutManager(new LinearLayoutManager(this));
+        rvProjects.setAdapter(adapter);
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -67,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                applyFilter();
+                applyFilter(null);
             }
 
             @Override
@@ -76,25 +78,34 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         btnNewProject.setOnClickListener(v -> showNewProjectDialog());
-        applyFilter();
+        applyFilter(null);
     }
 
     // ---------------------------------------------------------------- list + search
 
     /** Case-insensitive match on any part of the project name or tag. */
-    private void applyFilter() {
+    private void applyFilter(final Project scrollTo) {
         String query = etSearch.getText().toString().trim().toLowerCase(Locale.ROOT);
-        visibleProjects.clear();
+        ArrayList<Project> filtered = new ArrayList<>();
         for (Project p : projects) {
             if (query.isEmpty()
                     || p.getName().toLowerCase(Locale.ROOT).contains(query)
                     || p.getTag().toLowerCase(Locale.ROOT).contains(query)) {
-                visibleProjects.add(p);
+                filtered.add(p);
             }
         }
-        adapter.notifyDataSetChanged();
+        visibleProjects = filtered;
+        adapter.submitList(filtered, () -> {
+            if (scrollTo != null) {
+                int index = visibleProjects.indexOf(scrollTo);
+                if (index >= 0) {
+                    rvProjects.smoothScrollToPosition(index);
+                }
+            }
+        });
+        tvNoProjects.setVisibility(filtered.isEmpty() ? View.VISIBLE : View.GONE);
         tvShowing.setText(getString(R.string.showing_projects_format,
-                visibleProjects.size(), projects.size()));
+                filtered.size(), projects.size()));
     }
 
     // ---------------------------------------------------------------- navigation
@@ -121,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
                 break;
             }
         }
-        applyFilter();
+        applyFilter(null);
     }
 
     // ---------------------------------------------------------------- new project
@@ -133,11 +144,7 @@ public class HomeActivity extends AppCompatActivity {
                 project.addAttachment(new AttachmentLink(attachment.getId(), attachment.getResourceRef()));
             }
             projects.add(project);
-            applyFilter();
-            int index = visibleProjects.indexOf(project);
-            if (index >= 0) {
-                lvProjects.smoothScrollToPosition(index);
-            }
+            applyFilter(project);
         });
     }
 }
